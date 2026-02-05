@@ -1,0 +1,10 @@
+MLOps Project
+
+Sistema MLOps per l'analisi automatica del sentiment sui social media.
+
+Obiettivo:
+Costruire una pipeline completa che includa:
+- Modello NLP pre-addestrato
+- API di inferenza
+- Monitoraggio
+- CI/CD automatizzato
