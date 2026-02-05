@@ -1,6 +1,4 @@
 """
-monitor.py
-------------
 Simula il monitoraggio delle predizioni e il rilevamento del drift.
 """
 
@@ -10,7 +8,7 @@ from transformers import pipeline
 # Carico il modello
 model = pipeline(
     "sentiment-analysis",
-    model="sshleifer/tiny-distilroberta-base"
+    model="cardiffnlp/twitter-roberta-base-sentiment-latest"
 )
 
 # Simulo dati in arrivo
@@ -24,7 +22,7 @@ texts = [
 
 logs = []
 
-print("Raccolta predizioni...")
+print("📡 Raccolta predizioni...")
 
 for text in texts:
     prediction = model(text)[0]
@@ -47,6 +45,6 @@ print(distribution)
 
 # Se una classe supera 80%, segnalo possibile drift
 if distribution.max() > 0.8:
-    print("\n Possibile DRIFT rilevato!")
+    print("\n⚠️ Possibile DRIFT rilevato!")
 else:
-    print("\n Distribuzione bilanciata.")
+    print("\n✅ Distribuzione bilanciata.")
