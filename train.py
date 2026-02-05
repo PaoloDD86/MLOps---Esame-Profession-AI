@@ -15,6 +15,7 @@ from transformers import (
     Trainer
 )
 import mlflow
+
 try:
     import torch
     _dataloader_pin_memory = torch.cuda.is_available()
@@ -41,8 +42,6 @@ def tokenize(batch):
     """
     Trasforma il testo in token numerici.
     """
-    # Uso padding/truncation a lunghezza fissa per evitare mismatch 
-    # nelle dimensioni delle sequenze durante il batching.
     return tokenizer(
         batch["text"],
         padding="max_length",
@@ -81,7 +80,7 @@ try:
         dataloader_num_workers=0,
     )
 except TypeError:
-    # Fallback per versioni più vecchie: provo con l'argomento
+    # Fallback per versioni più vecchie: proviamo con l'argomento
     # `evaluate_during_training` (se disponibile), altrimenti senza
     # argomenti di valutazione espliciti.
     try:
@@ -124,7 +123,7 @@ trainer = Trainer(
 mlflow.set_experiment("Sentiment-MLOps")
 
 with mlflow.start_run():
-    print("Avvio training...")
+    print("🚀 Avvio training...")
     trainer.train()
 
     metrics = trainer.evaluate()
